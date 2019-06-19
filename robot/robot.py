@@ -98,7 +98,3 @@ def loop():
 	current = actionQueue[0]
 	if (not takeStep(current)): # takeStep return false to indicate the action is finished 
 		actionQueue = actionQueue(1:)
-
-
-
-
