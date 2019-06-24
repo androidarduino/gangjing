@@ -52,7 +52,7 @@ def len(text):
 
 def getAll():
 	#return all available voices
-	return _voice.keys()	
+	return _voice.keys()
 
 init()
 print _voice

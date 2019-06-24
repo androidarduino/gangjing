@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pos
 import time
 
@@ -12,29 +13,17 @@ epoch = lambda: int(round(time.time() * 1000))
 
 '''
 postures (22 basic poses):
-pos.look_front, pos.look_up, pos.look_45, pos.look_down, pos.look_left, pos.look_right, pos.look_pos.left_45, pos.look_pos.right_45
+pos.look_front, pos.look_up, pos.look_45, pos.look_down, pos.look_left, pos.look_right, pos.look_left_45, pos.look_right_45
 pos.left_down, pos.left_left, pos.left_45, pos.left_front, pos.left_front_45, pos.left_45_45, pos.left_45_front
 pos.right_down, pos.right_right, pos.right_45, pos.right_front, pos.right_front_45, pos.right_45_45, pos.right_45_front
 '''
 
-# example posture:
-
-pos.look_up = {
-	head2: 90 # servo head2 turns to 90 degree
-}
-
-# actions (use 22 basic poses to construct actions):
-
-LookRight = {
-	'0-0.5': [pos.look_left, pos.left_up, pos.right_down] # in 0 - 0.5 seconds, make the postures listed
-}
-
 ShakeDance = {
-	'0-0.5': [pos.look_left, pos.left_up, pos.right_down],
-	'0.5-1': [pos.look_right, pos.left_down, pos.right_up],
-	'1-1.5': [pos.look_left, pos.left_up, pos.right_down],
-	'1.5-2': [pos.look_right, pos.left_down, pos.right_up],
-	'2-2.5': [pos.look_front, pos.left_down, pos.right_down]
+	'0': [pos.look_left, pos.left_up, pos.right_down],
+	'0.5': [pos.look_right, pos.left_down, pos.right_up],
+	'1.5': [pos.look_left, pos.left_up, pos.right_down],
+	'2': [pos.look_right, pos.left_down, pos.right_up],
+	'3': [pos.look_front, pos.left_down, pos.right_down]
 }
 
 # matching it to a voice:
