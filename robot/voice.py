@@ -54,6 +54,9 @@ def getAll():
 	#return all available voices
 	return _voice.keys()
 
+def pause():
+    pygame.mixer.music.pause()
+
 init()
 print _voice
 play("讨厌讨厌，小拳拳锤你胸口，大坏蛋")

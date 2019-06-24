@@ -60,43 +60,49 @@ keyframes = {
 animations = {
     "团体操": {
         # each item could be either an array of pos, or a keyframe, program will altomatically inteprete keyframes into array of poses
-        0: "站立",
-        1: [left_up],
-        2: [right_up],
-        3: [left_front],
-        4: [right_front],
-        5: "站立"
+        1: "站立",
+        2: [left_up],
+        3: [right_up],
+        4: [left_front],
+        5: [right_front],
+        6: "站立"
     },
     "摇头": {
-        0: [look_left],
-        1: [look_right],
-        2: [look_left],
-        3: [look_right],
-        4: [look_left],
-        5: [look_right]
+        1: [look_left],
+        2: [look_right],
+        3: [look_left],
+        4: [look_right],
+        5: [look_left],
+        6: [look_right]
     },
     "点头": {
-        0: [look_front],
-        1: [look_down],
-        2: [look_front],
-        3: [look_down],
-        4: [look_front],
-        5: [look_down]
+        1: [look_front],
+        2: [look_down],
+        3: [look_front],
+        4: [look_down],
+        5: [look_front],
+        6: [look_down]
     },
     "念诗": {
-        0: "站立",
-        0: [left_front],
-        0: [left_up],
-        0: [left_down],
-        0: [right_front],
-        0: [right_up],
-        0: [right_down],
-        0: [left_front],
-        0: [left_up],
-        0: [left_down],
-        0: [right_front],
-        0: [right_up],
-        0: [right_down],
-        0: "站立"
+        1: "站立",
+        2: [left_front],
+        3: [left_up],
+        4: [left_down],
+        5: [right_front],
+        6: [right_up],
+        7: [right_down],
+        8: [left_front],
+        9: [left_up],
+        10: [left_down],
+        11: [right_front],
+        12: [right_up],
+        13: [right_down],
+        14: "站立"
+    },
+    "在座的各位都是垃圾": {
+    },
+    "小拳拳锤你胸口": {
+    },
+    "欢呼雀跃": {
     }
 }

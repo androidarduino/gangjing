@@ -1,89 +1,69 @@
 # -*- coding: utf-8 -*-
 import pos
+import voice
 import time
 
 epoch = lambda: int(round(time.time() * 1000))
+actionReset = True
 
-# robot movement design
+def queueAction(animation, voice_name):
+    factor = 1.0
+    if voice_name != '':
+        factor = voice.len(voice_name)
+    action = {}
+    for timestamp, arr in animation:
+        # expand all key frames
+        # adjust time points
+        if 
+        timestamp = timestamp * factor
+        if type(arr) == 'str':
+            arr = keyframes[arr]
+        action[timestamp] = arr
+    action["voice"] = voice_name
+    # queue it to actionQueue
+    actionQueue.append(action)
 
-# for every movement instruction, calculate the distance and smooth transit
-# a movement instruction consists of multiple timelines, each timeline describes a single movement
+def doAction(animation, voice_name):
+    actionReset = True
 
-#Postures:
-
-'''
-postures (22 basic poses):
-pos.look_front, pos.look_up, pos.look_45, pos.look_down, pos.look_left, pos.look_right, pos.look_left_45, pos.look_right_45
-pos.left_down, pos.left_left, pos.left_45, pos.left_front, pos.left_front_45, pos.left_45_45, pos.left_45_front
-pos.right_down, pos.right_right, pos.right_45, pos.right_front, pos.right_front_45, pos.right_45_45, pos.right_45_front
-'''
-
-ShakeDance = {
-	'0': [pos.look_left, pos.left_up, pos.right_down],
-	'0.5': [pos.look_right, pos.left_down, pos.right_up],
-	'1.5': [pos.look_left, pos.left_up, pos.right_down],
-	'2': [pos.look_right, pos.left_down, pos.right_up],
-	'3': [pos.look_front, pos.left_down, pos.right_down]
-}
-
-# matching it to a voice:
-
-voice1 = { 'file': 'voice1.mp3', 'start': 0, 'end': 3.74 } # defines a voice segment
-
-VoiceAction = { 'action': ShakeDance, 'voice': voice1, 'lenByVoice': True, 'lastExecuted': 0, 'commenced': 0 } # it will automatically adapt the timespan to the length of voice1.mp3
-
-actionQueue = []
-#TODO: 
-# 1. figure out how to play sound segment in a large file
-# 2. figure out how to do action steps
-# 3. practice moving servos in ranges, make a servo range function mapping
-# 4. connect hardware circuit
-
-def takeStep(action):
-	# calculate the action length based on all sub actions and the voice length
-	actionLength = getActionLenth(action['action'])
-	voice = action['voice']
-	lengthFactor = 1
-	voiceLength = voice['end'] - voice['start']
-	if action['lenByVoice']:
-		lengthFactor = voiceLength / totalLength(action['action'])
-#TODO: according to whether  'lenByVoice' is set, calculate the factor for steps
-	pos = action['lastExecuted']
-	if pos != 0:
-		#set the positions of motors
-		currentPos = getCurrentPositions()
-		#calculate step legnth
-		steps = calculateSteps(action['initpos'], action['action']) * lengthFactor
-		timeElapsed = epoch() - action['commenced']
-		finishedCount = 0
-		for timespan, postures in action['action']:
-			#apply step to currentPos
-			#update lastExecuted
-			s, e = timespan.split('-')
-			s, e = float(s), float(e)
-			if timeElapsed - s > 0 and timespan < e - s:
-				for p in postures:
-					currentPos[p] += steps[p] * timeElapsed * lengthFactor
-			else:
-				finishedCount += 1
-			if finishedCount == len(postures):
-				return False
-		action['lastExecuted'] = epoch()
-	else:
-		action['commenced'] = epoch()
-		action['initPos'] = getCurrentPositions()
-	return True
-
-def doAction(action):
-	actionQueue = []
-	actionQueue.append(action)
-
-def queueAction(action):
-	actionQueue.append(action)
-
-def loop():
-	if actionQueue == []:
-		return
-	current = actionQueue[0]
-	if (not takeStep(current)): # takeStep return false to indicate the action is finished 
-		actionQueue = actionQueue(1:)
+def doAction():
+    if len(actionQueue) == 0:
+        return
+    start_time = epoch
+    # take the first item in the queue
+    action = actionQueue.pop(0)
+    actionReset = False
+    # play audio
+    voc = action["voice"]
+    voc_len = 0.0
+    del action["voice"]
+    if voc != "":
+        voice.play(voc)
+        voc_len = voice.len(voc)
+    # read the first segment array, read all servo expected values
+    for ts, arr in action:
+        while(True):
+            # ** for each servo, get its current value
+            expected = {}
+            for sub_pos in arr:
+                servo_poses = pos.subpos[sub_pos]
+                for servo, percent in servo_poses:
+                    expected[servo] = percent
+            # compare and compute the step length of each servo, add it to servo
+            for servo in expected.keys():
+                diff = expected[servo] - current[servo]
+                step = diff / ts
+                current[servo] = current[servo] + step
+            # delay for a certain time
+            time.sleep(0.05)
+            ts -= 0.05
+            # check whether time passed voice length, if so, pause audio
+            if (epoch - start_time) > voc_len*1000:
+                voice.pause()
+            # check whether action queue is reset, if so, stop and return
+            if actionReset:
+                return
+            # check whether the step time passed, if passed, go to next segment array
+            if (ts <= 0):
+                break
+            # if not passed, repeat ** step
