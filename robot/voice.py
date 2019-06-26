@@ -40,8 +40,8 @@ def play(text):
 		return
 	[start, end] = _voice[text]
 	pygame.mixer.music.play(-1, start)
-	time.sleep(end-start)
-	pygame.mixer.music.pause()
+	#time.sleep(end-start)
+	#pygame.mixer.music.pause()
 
 def len(text):
 	#get length in seconds for a segment matching text
@@ -58,5 +58,5 @@ def pause():
     pygame.mixer.music.pause()
 
 init()
-print _voice
-play("讨厌讨厌，小拳拳锤你胸口，大坏蛋")
+#print _voice
+#play("讨厌讨厌，小拳拳锤你胸口，大坏蛋")
