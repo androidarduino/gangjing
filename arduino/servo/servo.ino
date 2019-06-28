@@ -45,7 +45,7 @@ uint8_t servonum = 0;
 0 90 up - 250 down nod
 */
 
-void setup() {
+/*void setup() {
   Serial.begin(9600);
   //Serial.println("8 channel Servo test!");
 
@@ -61,7 +61,7 @@ pwm.setPWM(5, 0, 250); //250 down, 90 front
 Serial.println("please send servo, angel to serial");
   delay(100);
 }
-
+*/
 // you can use this function if you'd like to set the pulse length in seconds
 // e.g. setServoPulse(0, 0.001) is a ~1 millisecond pulse width. its not precise!
 /*void setServoPulse(uint8_t n, double pulse) {
@@ -120,7 +120,7 @@ void dance() {
   servos(0,50,0,0,0,0,500);
 }
 
-void loop() {
+/*void loop() {
   // Drive each servo one at a time
   while(Serial.available() > 0) {
     int servo = Serial.parseInt();
@@ -138,7 +138,7 @@ void loop() {
     Serial.println(angel);
     pwm.setPWM(servo, 0, angel);
   }
-  
+*/  
 
   /*for (uint16_t pulselen = SERVOMAX; pulselen > SERVOMIN; pulselen--) {
     delay(2);

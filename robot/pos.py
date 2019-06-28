@@ -15,13 +15,13 @@ head1, head2, left1, left2, right1, right2 = 0, 1, 2, 3, 4, 5
 
 #sub postures
 subpos = {
-    look_front: { head1: 50, head2: 50 },
+    look_front: { head1: 0, head2: 50 },
     look_up: { head1: 0, head2: 50},
     look_45: { head1: 25, head2: 50},
-    look_down: { head1: 100, head2: 50 },
-    look_left: { head1: 50, head2: 100 },
-    look_right: { head1: 50, head2: 0 },
-    look_left_45: { head1: 25, head2: 100 },
+    look_down: { head1: 50, head2: 50 },
+    look_left: { head1: 0, head2: 0 },
+    look_right: { head1: 0, head2: 100 },
+    look_left_45: { head1: 0, head2: 0 },
     look_right_45: { head1: 25, head2: 0 },
 
     left_down: { left1: 0,  left2: 0 },
@@ -58,6 +58,13 @@ keyframes = {
 
 #animations
 animations = {
+    "测试": {
+        1: "站立",
+        2: "左手前指低头",
+        3: "skr",
+        4: "左直角",
+        5: "站立"
+    },
     "团体操": {
         # each item could be either an array of pos, or a keyframe, program will altomatically inteprete keyframes into array of poses
         1: "站立",
@@ -97,7 +104,7 @@ animations = {
         11: [right_front],
         12: [right_up],
         13: [right_down],
-        14: "站立"
+        6: "站立"
     },
     "在座的各位都是垃圾": {
     },
