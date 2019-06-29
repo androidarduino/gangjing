@@ -91,14 +91,16 @@ def doAction():
             # if not passed, repeat ** step
 
 def getReady():
-    arduino.write(0)
+    print "arduino ready"
+    arduino.write('0')
 
 def startContestA():
-    arduino.write(1)
+    print "staring contest with A"
+    arduino.write('1')
 
-def startContest():
-    arduino.write(2)
-'''
+def startContestB():
+    print "starting contest with B"
+    arduino.write('2')
 '''
 executeAction("念诗", "床前明月光，疑是地上霜。举头望明月，低头思故乡")
 doAction()
